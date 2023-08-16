@@ -1,0 +1,83 @@
+[user]
+    # Your name to be shown in history
+	name = Zac Rollins
+
+    # Default email (can be overridden per repository)
+	email = zac.rollins@idrivelogistics.com
+
+[core]
+    # command for interactive edit window
+	editor = code --wait
+
+    # controls how git will handle line endings
+	# can be:
+	# true
+	#    automaticly convert text files to CRLF on checkout and to LF on commit
+	# input
+	#    no conversion on checkout, convert to LF on commit.
+	# false
+	#    no conversion
+    # Windows system
+    autocrlf = true
+    # Mac/Linux system
+    # autocrlf = input
+
+	# Use custom `.gitignore` and `.gitattributes`
+    excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes_global
+
+[credential]
+    # Store credentials in Credential Vault
+	# Check version of manager using:
+	# git credential-manager version
+	helper = manager
+
+[color]
+	# use colors when writing output to terminal
+	ui = auto
+
+[color "status"]
+	# using bold colors makes them a bit more visible on dark background
+	added = green bold
+	untracked = red bold
+	changed = red bold
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+    log = true
+    tool = vscode
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[help]
+	# "guess" correct command when misspelling commands
+	# this will make "git commt" work
+	autoCorrect = -1
+
+[pull]
+	# set how git handles fast-forward, can be false or only
+	# false will create extra merge commit on pull
+	# only will only pull if fast-forward is possible (same as --ff-only)
+	# ff = only
+
+	# always do --rebase on pull
+	# this prevents wierd merges when someone pushed a new commit and you have made local commits
+	# can be potentially dangerous
+	#rebase = true
+
+[push]
+	# when doing git push, only push current branch
+	default = current
+
+[log]
+	# default to not show the full commit object name
+	abbrevCommit = true
+	# show short ref names on git log
+	decorate = short
