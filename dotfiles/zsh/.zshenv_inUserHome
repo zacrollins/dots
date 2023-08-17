@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+# .zshenv is sourced on all invocations of the shell, unless the -f option is set.
+# It should contain commands to set the command search path, plus other important environment variables.
+# .zshenv' should not contain commands that produce output or assume the shell is attached to a tty.
+
+###############################
+# EXPORT ENVIRONMENT VARIABLE #
+###############################
+
+export DOTFILES="$HOME/.config"
+
+# Environment Vars
+export PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTSIZE=10000                   # Maximum events for internal history
+export SAVEHIST=10000                   # Maximum events in history file
+export HIST_STAMPS="yyyy-mm-dd"
+
+# NPM
+#export NPM_PATH="$XDG_CONFIG_HOME/node_modules"
+#export NPM_BIN="$XDG_CONFIG_HOME/node_modules/bin"
+#export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/node_modules"
+
+# export a variable marking zprofile as sourced
+export ZSHENV_SOURCED=1

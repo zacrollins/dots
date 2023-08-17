@@ -14,13 +14,16 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-# sudo scutil --set ComputerName "zrmac"
-# sudo scutil --set HostName "zrmac"
-# sudo scutil --set LocalHostName "zrmac"
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "zrmac"
+sudo scutil --set ComputerName "zrmac"
+sudo scutil --set HostName "zrmac"
+sudo scutil --set LocalHostName "zrmac"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "zrmac"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
+
+# Disable transparency in the menu bar and elsewhere on Yosemite
+# defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Set highlight color to green
 # defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
@@ -59,15 +62,15 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 # defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
+# Disable Resume system-wide
+# defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
 # Set Help Viewer windows to non-floating mode
 # defaults write com.apple.helpviewer DevMode -bool true
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
 
 # Never go into computer sleep mode
 # sudo systemsetup -setcomputersleep Off > /dev/null
@@ -88,7 +91,7 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable auto-correct
-# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
@@ -158,10 +161,51 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-# sudo systemsetup -settimezone "Asia/Singapore" > /dev/null
+sudo systemsetup -settimezone "America/Denver" > /dev/null
 
 # Stop iTunes from responding to the keyboard media keys
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+###############################################################################
+# Energy saving                                                               #
+###############################################################################
+
+# Enable lid wakeup
+sudo pmset -a lidwake 1
+
+# Restart automatically on power loss
+sudo pmset -a autorestart 1
+
+# Restart automatically if the computer freezes
+sudo systemsetup -setrestartfreeze on
+
+# Sleep the display after 15 minutes
+# sudo pmset -a displaysleep 15
+
+# Disable machine sleep while charging
+# sudo pmset -c sleep 0
+
+# Set machine sleep to 5 minutes on battery
+# sudo pmset -b sleep 5
+
+# Set standby delay to 24 hours (default is 1 hour)
+# sudo pmset -a standbydelay 86400
+
+# Never go into computer sleep mode
+# sudo systemsetup -setcomputersleep Off > /dev/null
+
+# Hibernation mode
+# 0: Disable hibernation (speeds up entering sleep mode)
+# 3: Copy RAM to disk so the system state can still be restored in case of a
+#    power failure.
+# sudo pmset -a hibernatemode 0
+
+# Remove the sleep image file to save disk space
+# sudo rm /private/var/vm/sleepimage
+# Create a zero-byte file instead…
+# sudo touch /private/var/vm/sleepimage
+# …and make sure it can’t be rewritten
+# sudo chflags uchg /private/var/vm/sleepimage
 
 ###############################################################################
 # Screen                                                                      #
@@ -172,7 +216,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
-# defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/screenshots"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -197,10 +241,10 @@ defaults write com.apple.finder QuitMenuItem -bool true
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 
-# Set Desktop as the default location for new Finder windows
+# Set user HOME as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Icons for hard drives, servers, and removable media on the desktop
 # defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -212,7 +256,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desk
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -353,7 +397,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.15
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true

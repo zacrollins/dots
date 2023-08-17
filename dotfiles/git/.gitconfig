@@ -23,8 +23,8 @@
     # autocrlf = input
 
 	# Use custom `.gitignore` and `.gitattributes`
-    excludesfile = ~/.gitignore_global
-	attributesfile = ~/.gitattributes_global
+    excludesfile = ~/.config/git/.gitignore_global
+	attributesfile = ~/.config/git/.gitattributes_global
 
 [credential]
     # Store credentials in Credential Vault
