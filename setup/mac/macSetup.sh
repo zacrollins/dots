@@ -9,6 +9,13 @@
 # # Install Homebrew
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# Update/Upgrade brew
+# brew update
+# brew upgrade
+
+# Save Homebrew’s installed location.
+BREW_PREFIX=$(brew --prefix)
+
 # Tap into additional Homebrew channels
 declare -a taps=(
     'azure/functions'
@@ -30,6 +37,7 @@ declare -a brews=(
     'azure/functions/azure-functions-core-tools'
     'azure/kubelogin/kubelogin'
     'bat'
+    'coreutils'
     'exa'
     'fx'
     'git'
@@ -42,17 +50,17 @@ declare -a brews=(
     #  'reattach-to-user-namespace'
     #  'tmux'
     'readline'
+    'skhd'
     'starship'
     'tree'
     'watch'
     'wget'
+    'yabai'
     'zsh'
     'zsh-autosuggestions'
     'zsh-completions'
     'zsh-history-substring-search'
     'zsh-syntax-highlighting'
-    'skhd'
-    'yabai'
 )
 
 for brew in "${brews[@]}"; do
@@ -71,7 +79,7 @@ declare -a cask_apps=(
     'font-caskaydia-cove-nerd-font'
     'font-fira-code-nerd-font'
     'font-hack-nerd-font'
-    'git-credential-manager-core'
+    'git-credential-manager'
     'google-chrome'
     'hammerspoon'
     'karabiner-elements'

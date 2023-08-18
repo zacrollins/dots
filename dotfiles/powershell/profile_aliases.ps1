@@ -26,7 +26,7 @@ Set-Alias kubectx -Value Select-KubeContext
 Register-PSKubeContextComplete
 
 # jq
-Set-Alias jq -Value 'jq-win64'
+# Set-Alias jq -Value 'jq-win64'
 
 # argocd
 Set-Alias argocd -Value 'argocd-windows-amd64'
