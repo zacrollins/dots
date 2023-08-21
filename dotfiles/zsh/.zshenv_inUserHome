@@ -4,24 +4,43 @@
 # It should contain commands to set the command search path, plus other important environment variables.
 # .zshenv' should not contain commands that produce output or assume the shell is attached to a tty.
 
-###############################
-# EXPORT ENVIRONMENT VARIABLE #
-###############################
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/local/share"
+export XDG_CACHE_HOME="$HOME/cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="$HOME/.xdg"
+export XDG_PROJECTS_DIR="$HOME/src"
 
-export DOTFILES="$HOME/.config"
+# Custom
+export DOTFILES=$HOME/dots
+
+# Zsh dotfiles
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Environment Vars
 export PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
-
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
-
 export EDITOR="nvim"
 export VISUAL="nvim"
+# Apps
+export EDITOR="nvim"
+export VISUAL="code-insiders"
+export PAGER="less"
+if [[ "$OSTYPE" == darwin* ]]; then
+    export BROWSER='open'
+fi
 
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# Regional settings
+export LANG='en_US.UTF-8'
 
+# Misc
+export KEYTIMEOUT=1
+export SHELL_SESSIONS_DISABLE=1 # Make Apple Terminal behave.
+
+# Use `< file` to quickly view the contents of any file.
+[[ -z "$READNULLCMD" ]] || READNULLCMD=$PAGER
+
+# History
 export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file

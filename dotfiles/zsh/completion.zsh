@@ -1,4 +1,4 @@
-  # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _ 
+  # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _
 #  / ___/ _ \|  \/  |  _ \| |   | ____|_   _|_ _/ _ \| \ | |
 # | |  | | | | |\/| | |_) | |   |  _|   | |  | | | | |  \| |
 # | |__| |_| | |  | |  __/| |___| |___  | |  | | |_| | |\  |
@@ -9,8 +9,11 @@
 # | General |
 # +---------+
 
-# Load more completions
-fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
+# Load zsh-completions plugin completions
+fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
+
+# load homebrew installed completions
+fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 
 # Should be called before compinit
 zmodload zsh/complist
@@ -22,13 +25,13 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
-bindkey -M menuselect '^xg' clear-screen
-bindkey -M menuselect '^xi' vi-insert                      # Insert
-bindkey -M menuselect '^xh' accept-and-hold                # Hold
-bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
-bindkey -M menuselect '^xu' undo                           # Undo
+# bindkey -M menuselect '^xg' clear-screen
+# bindkey -M menuselect '^xi' vi-insert                      # Insert
+# bindkey -M menuselect '^xh' accept-and-hold                # Hold
+# bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
+# bindkey -M menuselect '^xu' undo                           # Undo
 
-autoload -U compinit; compinit
+autoload -Uz compinit; compinit
 _comp_options+=(globdots) # With hidden files
 
 # Only work with the Zsh function vman

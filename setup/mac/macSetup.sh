@@ -52,6 +52,7 @@ declare -a brews=(
     'readline'
     'skhd'
     'starship'
+    'tealdeer'
     'tree'
     'watch'
     'wget'
@@ -69,6 +70,9 @@ done
 
 # install casks
 declare -a cask_apps=(
+    '1password'
+    '1password-cli'
+    'asana'
     'alacritty'
     'authy'
     'azure-data-studio'

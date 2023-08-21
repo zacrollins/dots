@@ -1,6 +1,4 @@
-# +----+
-# | ls |
-# +----+
+# ls list dir
 
 # alias ls='ls --color=auto'
 # alias l='ls -l'
@@ -10,47 +8,41 @@ alias ls='exa'
 alias l='exa -l'
 alias ll='exa -lahF'
 
-# +----+
-# | cp |
-# +----+
-
+# copy
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
 
-# +------+
-# | ping |
-# +------+
-
+# ping
 alias pg='ping 8.8.8.8'
 
-# +------+
-# | time |
-# +------+
+# macos
+if [[ ${OSTYPE} == "darwin"* ]]; then
+    alias cpwd='pwd | tr -d "\n" | pbcopy'                        # Copy the working path to clipboard
+    alias cl="fc -e -|pbcopy"                                     # Copy output of last command to clipboard
+    alias caff="caffeinate -ism"                                  # Run command without letting mac sleep
+    alias cleanDS="find . -type f -name '*.DS_Store' -ls -delete" # Delete .DS_Store files on Macs
+fi
 
+# time
 alias time='/usr/bin/time'
 
-# +--------+
-# | Neovim |
-# +--------+
-
+# neovim
 alias vim='nvim'
 alias vi='nvim'
 
-# +-----+
-# | Git |
-# +-----+
-
+# git
 alias gs='git status'
 alias gss='git status -s'
 alias ga='git add'
 alias gp='git push'
+alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short' # A nicer Git Log
 
-# +---------+
-# | netstat |
-# +---------+
-
+# netstat
 alias port="netstat -tulpn | grep"
 
-# other
+# code
 alias code='code-insiders'
+
+# kubectl
+alias k='kubectl'
